@@ -31,9 +31,17 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
+/**
+ * The main game "loop", called when the script is first loaded
+ * and after the user's answer has been processed
+ */ 
+
 // run game
 function runGame() {
-
+    // creates two random numbers between 1 and 25 (even possibility of all numbers appearing)
+    // using Math.ceil(Math.random() * 25) would do the same but 25 is less likely to appear
+    let num1 = Math.floor(Math.random() *25) +1;
+    let num2 = Math.floor(Math.random() *25) +1;
 }
 
 // check answer
