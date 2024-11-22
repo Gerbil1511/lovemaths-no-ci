@@ -1,6 +1,7 @@
 // Wait for the DOM to finish loading before running the game
 // Get the button elements and add event listeners to them
 
+
 document.addEventListener("DOMContentLoaded", function() {
 
     let buttons = document.getElementsByTagName("button");
@@ -18,6 +19,14 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
     }
+
+    // Add event listener for enter key
+    document.getElementById("answer-box").addEventListener("keydown", function(event) {
+        if (event.key === "Enter") {
+            checkAnswer();
+        }
+    });
+
     // Start the game with the addition game type by default
     runGame("addition");
 });
@@ -29,6 +38,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
 // run game
 function runGame(gameType) {
+
+    // Clear the answer box for the next question
+    document.getElementById("answer-box").value = "";
+    // Focus the cursor in the answer box ready for typing
+    document.getElementById("answer-box").focus();
 
     // creates two random numbers between 1 and 25 (even possibility of all numbers appearing)
     // using Math.ceil(Math.random() * 25) would do the same but 25 is less likely to appear
@@ -68,12 +82,6 @@ function checkAnswer() {
         alert(`Awwww...you answered ${userAnswer}. The correct answer was ${calculatedAnswer[0]}!`);
         incrementWrongAnswer(); // Increment the wrong answer tally if the answer is incorrect
     }
-
-    /**
-     * THIS CODE LINE PERSONALLY ADDED BY ME (not in the LMS runthrough)
-    */
-    // Clear the answer box for the next question
-    document.getElementById("answer-box").value = "";
 
     // Call runGame with the next game type
     runGame(calculatedAnswer[1]);
