@@ -2,6 +2,7 @@
 // Get the button elements and add event listeners to them
 
 document.addEventListener("DOMContentLoaded", function() {
+
     let buttons = document.getElementsByTagName("button");
 
     for(let button of buttons) {
@@ -26,6 +27,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 // run game
 function runGame(gameType) {
+
     // creates two random numbers between 1 and 25 (even possibility of all numbers appearing)
     // using Math.ceil(Math.random() * 25) would do the same but 25 is less likely to appear
     let num1 = Math.floor(Math.random() *25) +1;
@@ -46,16 +48,20 @@ function runGame(gameType) {
  */
 // check answer
 function checkAnswer() {
+
     let userAnswer = parseInt(document.getElementById("answer-box").value);
     let calculatedAnswer = calculateCorrectAnswer();
     let isCorrect = userAnswer === calculatedAnswer[0];
+
         if (isCorrect) {
             alert("Hey! You got it right! :D");
+            incrementScore();
         } else {
             alert(`Awwww...you answered ${userAnswer}. The correct answer was ${calculatedAnswer[0]}!`);
+            incrementWrongAnswer();
         }
 
-        // Clear the answer box
+        // Personally added by me - Clear the answer box
     document.getElementById("answer-box").value = "";
         // Call runGame with the next game type
         runGame(calculatedAnswer[1]);
@@ -79,18 +85,30 @@ function calculateCorrectAnswer() {
     }
 }
 
+/**
+ *  Gets the current score from the DOM, increments it by 1
+ * (you can use innerText or textConent, they are interchangeable)
+ */
 // increment score
 function incrementScore() {
-
+    let oldScore = parseInt(document.getElementById("score").innerText);
+    document.getElementById("score").innerText = ++oldScore;
 }
 
+/**
+ * Gets the current tally of incorrect answers from the DOM, increments it by 1
+ * (you can use innerText or textConent, they are interchangeable)
+ */
 // incremet wrong answer
 function incrementWrongAnswer() {
 
+    let oldScore = parseInt(document.getElementById("incorrect").innerText);
+    document.getElementById("incorrect").innerText = ++oldScore;
 }
 
-// display addition q
+// display addition q (you can use innerText or textConent, they are interchangeable)
 function displayAdditionQ(operand1, operand2) {
+
     document.getElementById("operand1").textContent = operand1;
     document.getElementById("operand2").textContent = operand2;
     document.getElementById("operator").textContent = "+";
